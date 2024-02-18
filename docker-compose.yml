@@ -1,0 +1,55 @@
+version: "3.1"
+
+services:
+  gateway_app:
+    container_name: gateway_app
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql_db
+    env_file:
+      - .env
+    volumes:
+      - ./gateway/src:/app/gateway/src
+    ports:
+      - "${GATEWAY_PORT}:${GATEWAY_PORT}"
+    command: npm run start:dev
+
+  users_app:
+    container_name: users_app
+    build:
+      context: ./users
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql_db
+    env_file:
+      - .env
+    volumes:
+      - ./users/src:/app/users/src
+    ports:
+      - "${USERS_PORT}:${USERS_PORT}"
+    command: npm run start:dev
+
+  comments_app:
+    container_name: comments_app
+    build:
+      context: ./comments
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql_db
+    env_file:
+      - .env
+    volumes:
+      - ./comments/src:/app/comments/src
+    ports:
+      - "${COMMENTS_PORT}:${COMMENTS_PORT}"
+    command: npm run start:dev
+
+  mysql_db:
+    image: mysql
+    container_name: mysql_db
+    env_file:
+      - .env
+    ports:
+      - "${MYSQL_TCP_PORT}:${MYSQL_TCP_PORT}"
