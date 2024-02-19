@@ -7,6 +7,8 @@ import {
   MicroservicesCMDs,
   UserDTO,
   JWTUser,
+  UpdateUserRoleDTO,
+  SuccessResponse,
 } from 'nestjs-app-utils'
 
 @Injectable()
@@ -27,12 +29,22 @@ export class UsersService {
   }
 
   /**
-   * Метод сервиса UsersService для получения всех пользователей (роль ADMIN)
+   * Метод сервиса UsersService для получения всех пользователей (доступно для роли ADMIN)
    */
   getAllUsers() {
     return this.nestClient.send<UserDTO[]>(
       { cmd: MicroservicesCMDs.GET_ALL_USERS },
       {},
+    )
+  }
+
+  /**
+   * Метод сервиса UsersService для обновления роли пользователя по id (доступно для роли ADMIN)
+   */
+  updateUserRole(updateUserRoleDTO: UpdateUserRoleDTO) {
+    return this.nestClient.send<SuccessResponse, UpdateUserRoleDTO>(
+      { cmd: MicroservicesCMDs.PUT_USER_ROLE },
+      updateUserRoleDTO,
     )
   }
 }

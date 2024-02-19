@@ -118,3 +118,11 @@ export class RegisterRequestDTO {
   })
   password: string;
 }
+
+/**
+ * DTO для обновления роли пользователя
+ */
+export class UpdateUserRoleDTO {
+  id: string;
+  role: UserRole;
+}

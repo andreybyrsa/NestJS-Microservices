@@ -33,8 +33,8 @@ dependencies:
     specifier: ^3.9.1
     version: 3.9.1
   nestjs-app-utils:
-    specifier: ^1.1.3
-    version: 1.1.3(@nestjs/core@10.3.3)(reflect-metadata@0.2.1)(rxjs@7.8.1)
+    specifier: ^1.1.6
+    version: 1.1.6(@nestjs/core@10.3.3)(reflect-metadata@0.2.1)(rxjs@7.8.1)
   reflect-metadata:
     specifier: ^0.2.0
     version: 0.2.1
@@ -4373,8 +4373,8 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
-  /nestjs-app-utils@1.1.3(@nestjs/core@10.3.3)(reflect-metadata@0.2.1)(rxjs@7.8.1):
-    resolution: {integrity: sha512-Fsm/fjiHkmorPx4yg49BvwEx2x2VSD+XojYFZmZ+U9zC8u2S9YnrrUCP0cmB14hZfmFTfKISfALRPzXLy+TA8A==}
+  /nestjs-app-utils@1.1.6(@nestjs/core@10.3.3)(reflect-metadata@0.2.1)(rxjs@7.8.1):
+    resolution: {integrity: sha512-471axH5hqaKIeoRa6XT5DyWMmzIsThEIC72IZifNEVhA60KBMEuT4eWABLa6sui6SH+3fZ4Wi1M7o5AvgLWUjg==}
     dependencies:
       '@nestjs/common': 10.3.3(reflect-metadata@0.2.1)(rxjs@7.8.1)
       '@nestjs/microservices': 10.3.3(@nestjs/common@10.3.3)(@nestjs/core@10.3.3)(reflect-metadata@0.2.1)(rxjs@7.8.1)

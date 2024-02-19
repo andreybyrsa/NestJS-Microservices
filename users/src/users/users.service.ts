@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -9,6 +9,8 @@ import { User } from 'src/model/User.entity';
 import {
   RegisterRequestDTO,
   RpcCustomException,
+  SuccessResponse,
+  UpdateUserRoleDTO,
   UserDTO,
 } from 'nestjs-app-utils';
 
@@ -75,6 +77,41 @@ export class UsersService {
       console.error(error);
       throw new RpcCustomException({
         message: 'Ошибка создания пользователя',
+        status: HttpStatus.FORBIDDEN,
+      });
+    }
+  }
+
+  /**
+   * Обновляет роль пользователя (доступно для роли ADMIN)
+   */
+  async updateUserRole(
+    updateUserRoleDTO: UpdateUserRoleDTO,
+  ): Promise<SuccessResponse> {
+    const { id, role } = updateUserRoleDTO;
+
+    const isExistUser = await this.usersRepository.exists({
+      where: { id },
+    });
+
+    if (!isExistUser) {
+      throw new RpcCustomException({
+        message: 'Пользователь не найден',
+        status: HttpStatus.BAD_REQUEST,
+      });
+    }
+
+    try {
+      await this.usersRepository.update({ id }, { role });
+
+      return new SuccessResponse({
+        message: 'Успешное обновление роли пользователя',
+        status: HttpStatus.OK,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new RpcCustomException({
+        message: 'Ошибка обновления роли пользователя',
         status: HttpStatus.FORBIDDEN,
       });
     }
