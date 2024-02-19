@@ -23,6 +23,21 @@ async function runServer() {
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig)
   SwaggerModule.setup('doc', app, swaggerDocument)
 
+  app.enableCors({
+    origin: ['http://localhost:8080', 'https://localhost:8080'],
+    allowedHeaders: [
+      'Content-Type',
+      'Accept',
+      'Authorization',
+      'Origin',
+      'X-Requested-With',
+      'X-Csrf-Token',
+      'X-XSS-Protection',
+    ],
+    methods: '*',
+    credentials: true,
+  })
+
   await app.listen(PORT)
 }
 

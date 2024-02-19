@@ -43,8 +43,9 @@ export class JWTMidlleware implements NestMiddleware {
    * Возвращает Bearer токен из хедеров запроса
    */
   private extractTokenFromHeader(request: Request): string | null {
-    const authorizationString = request.headers['authorization']
-    const [type, token] = authorizationString.split(' ') ?? []
+    const authorizationString: string | undefined =
+      request.headers?.['authorization']
+    const [type, token] = authorizationString?.split(' ') ?? []
     return type === 'Bearer' ? token : null
   }
 }
