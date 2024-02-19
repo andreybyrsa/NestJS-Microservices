@@ -1,11 +1,12 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-
 import * as bcrypt from 'bcrypt';
 
 // project imports
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/model/User.entity';
+
+// utils from package
 import {
   UserResponseDTO,
   LoginRequestDTO,
@@ -20,6 +21,9 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  /**
+   * Авторизовывает пользователя
+   */
   async login(userDTO: LoginRequestDTO): Promise<UserResponseDTO> {
     const { email, password } = userDTO;
 
@@ -46,6 +50,9 @@ export class AuthService {
     }
   }
 
+  /**
+   * Регистрирует пользователя с уникальным email
+   */
   async register(userDTO: RegisterRequestDTO): Promise<UserResponseDTO> {
     const { email, username, password } = userDTO;
 
@@ -80,6 +87,9 @@ export class AuthService {
     }
   }
 
+  /**
+   * Создает accessToken на основе объекта пользователя (без пароля)
+   */
   private async authorizeUser(user: User): Promise<UserResponseDTO> {
     const { password, ...restUser } = user;
     const payload = restUser;

@@ -1,6 +1,10 @@
 import { Controller, Post, Body, HttpStatus } from '@nestjs/common'
-import { AuthService } from './auth.service'
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger'
+
+// project imports
+import { AuthService } from './auth.service'
+
+// types from package
 import {
   UserResponseDTO,
   LoginRequestDTO,

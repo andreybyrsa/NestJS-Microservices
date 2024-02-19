@@ -6,6 +6,9 @@ import { UsersMicroserviceConrtoller } from './users.controller';
 import { UsersService } from './users.service';
 import { User } from 'src/model/User.entity';
 
+/**
+ * Модуль микросервиса users для работы с пользователями
+ */
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersMicroserviceConrtoller],

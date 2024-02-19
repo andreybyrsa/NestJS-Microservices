@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
 import { JWTMidlleware } from './middlewares/jwt.middleware'
 
+// Конфигурация JWT модуля
 const jwtModuleOptions: JwtModuleOptions = {
   secret: process.env.JWT_SECRET,
   signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
@@ -23,6 +24,7 @@ const jwtModuleOptions: JwtModuleOptions = {
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    // Убираем обработку роутов api/auth/* JWT мидлваром
     consumer.apply(JWTMidlleware).exclude('api/auth/(.*)').forRoutes('*')
   }
 }

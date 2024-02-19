@@ -2,8 +2,10 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-// types
+// project imports
 import { User } from 'src/model/User.entity';
+
+// utils from package
 import {
   RegisterRequestDTO,
   RpcCustomException,
@@ -16,6 +18,9 @@ export class UsersService {
     @InjectRepository(User) private readonly usersRepository: Repository<User>,
   ) {}
 
+  /**
+   * Возвращает пользователя по id из бд
+   */
   async getUserById(id: string): Promise<UserDTO> {
     try {
       const currentUser = await this.usersRepository
@@ -32,10 +37,16 @@ export class UsersService {
     }
   }
 
+  /**
+   * Возвращает пользователя из бд по его уникальному email
+   */
   getUserByEmail(email: string) {
     return this.usersRepository.findOne({ where: { email } });
   }
 
+  /**
+   * Возвращает список пользователей из бд (роль ADMIN)
+   */
   async getAllUsers(): Promise<UserDTO[]> {
     try {
       const users = await this.usersRepository
@@ -52,6 +63,9 @@ export class UsersService {
     }
   }
 
+  /**
+   * Создает пользователя в бд
+   */
   createUser(userDTO: RegisterRequestDTO): Promise<User> {
     try {
       const user = this.usersRepository.create(userDTO);

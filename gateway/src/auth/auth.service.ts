@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { ClientProxy } from '@nestjs/microservices'
 import { Observable } from 'rxjs'
 
+// types from package
 import {
   LoginRequestDTO,
   RegisterRequestDTO,
@@ -16,6 +17,9 @@ export class AuthService {
     private readonly nestClient: ClientProxy,
   ) {}
 
+  /**
+   * Метод сервиса AuthService используется в роуте /api/login
+   */
   login(userDTO: LoginRequestDTO): Observable<LoginRequestDTO> {
     return this.nestClient.send<LoginRequestDTO>(
       { cmd: MicroservicesCMDs.AUTH_LOGIN },
@@ -23,6 +27,9 @@ export class AuthService {
     )
   }
 
+  /**
+   * Метод сервиса AuthService используется в роуте /api/register
+   */
   register(userDTO: RegisterRequestDTO): Observable<RegisterRequestDTO> {
     return this.nestClient.send<RegisterRequestDTO>(
       { cmd: MicroservicesCMDs.AUTH_REGISTER },

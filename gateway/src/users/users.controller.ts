@@ -1,10 +1,14 @@
-import { Controller, Get, HttpStatus, UseGuards } from '@nestjs/common'
-import { UsersService } from './users.service'
+import { Controller, Get, HttpStatus } from '@nestjs/common'
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger'
-import { JWTUser as JWTUserType, UserDTO, UserRole } from 'nestjs-app-utils'
 import { Observable } from 'rxjs'
+
+//  project imports
 import { JWTUser } from 'src/decorators/JWTUser.decorator'
 import { Roles } from 'src/decorators/roles.decorator'
+import { UsersService } from './users.service'
+
+// types from package
+import { JWTUser as JWTUserType, UserDTO, UserRole } from 'nestjs-app-utils'
 
 @ApiTags('Работа с пользователями')
 @Controller('api/users')

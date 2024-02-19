@@ -1,8 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 
+// project imports
 import { AppModule } from './app.module';
 
+// Конфигурация микросервиса users
 const transportOptions: MicroserviceOptions = {
   transport: Transport.TCP,
   options: {

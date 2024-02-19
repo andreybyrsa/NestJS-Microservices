@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus } from "@nestjs/common";
+import { HttpStatus } from "@nestjs/common";
 import { RpcException } from "@nestjs/microservices";
 
 /**
