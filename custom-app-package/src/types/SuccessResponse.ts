@@ -1,10 +1,20 @@
 import { HttpStatus } from "@nestjs/common";
+import { ApiProperty } from "@nestjs/swagger";
 
 /**
  * Типизация параметров для SuccessResponse
  */
 export class SuccessResponseOptions {
+  @ApiProperty({
+    example: "Успешный запрос",
+    description: "Сообщение (информация) с сервера о состоянии запроса",
+  })
   message: string;
+
+  @ApiProperty({
+    example: "200",
+    description: "Статус ответа с сервера (2XX)",
+  })
   status: HttpStatus;
 }
 

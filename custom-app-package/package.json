@@ -1,6 +1,6 @@
 {
   "name": "nestjs-app-utils",
-  "version": "1.2.0",
+  "version": "2.3.0",
   "description": "library for nest-js project",
   "main": "dist/index",
   "types": "dist/index",

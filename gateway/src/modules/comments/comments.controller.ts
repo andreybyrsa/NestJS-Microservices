@@ -31,7 +31,12 @@ export class CommentsController {
 
   @ApiOperation({ summary: 'Получить все комментарии пользователя' })
   @ApiParam({ name: 'userId', type: 'string' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Success' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Success',
+    isArray: true,
+    type: ResponseCommentDTO,
+  })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad Request' })
   @Get('current-user/all')
   getUserComments(
@@ -41,7 +46,11 @@ export class CommentsController {
   }
 
   @ApiOperation({ summary: 'Создать комментарий' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Success' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Success',
+    type: ResponseCommentDTO,
+  })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad Request' })
   @Post('create')
   createComment(
@@ -53,7 +62,11 @@ export class CommentsController {
 
   @ApiOperation({ summary: 'Обновить комментарий' })
   @ApiParam({ name: 'id', type: 'string' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Success' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Success',
+    type: ResponseCommentDTO,
+  })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad Request' })
   @Put(':id/update')
   updateComment(
@@ -70,7 +83,11 @@ export class CommentsController {
 
   @ApiOperation({ summary: 'Удалить комментарий' })
   @ApiParam({ name: 'id', type: 'string' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Success' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Success',
+    type: SuccessResponse,
+  })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad Request' })
   @Delete(':id/delete')
   deleteComment(
