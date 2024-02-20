@@ -42,9 +42,9 @@ export class UsersMicroserviceConrtoller {
   }
 
   /**
-   * Обработчик UPDATE_COMMENT команды
+   * Обработчик UPDATE_USER_ROLE команды
    */
-  @MessagePattern({ cmd: MicroservicesCMDs.UPDATE_COMMENT })
+  @MessagePattern({ cmd: MicroservicesCMDs.UPDATE_USER_ROLE })
   updateUserRole(
     @Payload() updateUserRoleDTO: UpdateUserRoleDTO,
   ): Promise<SuccessResponse> {
