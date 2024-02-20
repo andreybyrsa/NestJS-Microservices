@@ -28,10 +28,17 @@ export class AuthService {
     const { email, password } = userDTO;
 
     const DBUser = await this.usersService.getUserByEmail(email);
-    const isMatchPassword = await bcrypt.compare(password, DBUser.password);
+    // Если логин не совпал - отправляем ошибку
+    if (!DBUser) {
+      throw new RpcCustomException({
+        message: 'Ошибка авторизации',
+        status: HttpStatus.BAD_REQUEST,
+      });
+    }
 
-    // Если логин или пароль не совпал - отправляем ошибку
-    if (!DBUser || !isMatchPassword) {
+    const isMatchPassword = await bcrypt.compare(password, DBUser.password);
+    // Если пароль не совпал - отправляем ошибку
+    if (!isMatchPassword) {
       throw new RpcCustomException({
         message: 'Ошибка авторизации',
         status: HttpStatus.BAD_REQUEST,
@@ -45,7 +52,7 @@ export class AuthService {
     } catch (error) {
       console.error(error);
       throw new RpcCustomException({
-        message: 'Ошибка авторизации',
+        message: error.message,
         status: HttpStatus.FORBIDDEN,
       });
     }
