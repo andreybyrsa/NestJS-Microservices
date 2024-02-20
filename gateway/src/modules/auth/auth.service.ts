@@ -18,7 +18,7 @@ export class AuthService {
   ) {}
 
   /**
-   * Метод сервиса AuthService используется в роуте /api/login
+   * Метод сервиса AuthService используется в роуте /api/auth/login
    */
   login(userDTO: LoginRequestDTO): Observable<LoginRequestDTO> {
     return this.nestClient.send<LoginRequestDTO>(
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   /**
-   * Метод сервиса AuthService используется в роуте /api/register
+   * Метод сервиса AuthService используется в роуте /api/auth/register
    */
   register(userDTO: RegisterRequestDTO): Observable<RegisterRequestDTO> {
     return this.nestClient.send<RegisterRequestDTO>(

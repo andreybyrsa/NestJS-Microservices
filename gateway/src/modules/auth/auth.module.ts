@@ -3,7 +3,9 @@ import { Module } from '@nestjs/common'
 // project imports
 import { AuthService } from './auth.service'
 import { AuthController } from './auth.controller'
-import { NestClientModule } from 'src/modules/nestClient/nestClient.module'
+
+// utils from package
+import { NestClientModule } from 'nestjs-app-utils'
 
 /**
  * Gateway модуль авторизации

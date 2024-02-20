@@ -43,7 +43,7 @@ export class UsersService {
    */
   updateUserRole(updateUserRoleDTO: UpdateUserRoleDTO) {
     return this.nestClient.send<SuccessResponse, UpdateUserRoleDTO>(
-      { cmd: MicroservicesCMDs.PUT_USER_ROLE },
+      { cmd: MicroservicesCMDs.UPDATE_USER_ROLE },
       updateUserRoleDTO,
     )
   }

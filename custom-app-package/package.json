@@ -1,6 +1,6 @@
 {
   "name": "nestjs-app-utils",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "library for nest-js project",
   "main": "dist/index",
   "types": "dist/index",
@@ -19,6 +19,7 @@
   "dependencies": {
     "@nestjs/common": "^10.3.3",
     "@nestjs/microservices": "^10.3.3",
-    "@nestjs/swagger": "^7.3.0"
+    "@nestjs/swagger": "^7.3.0",
+    "typeorm": "^0.3.20"
   }
 }

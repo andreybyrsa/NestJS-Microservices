@@ -2,9 +2,6 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-// project imports
-import { User } from 'src/model/User.entity';
-
 // utils from package
 import {
   RegisterRequestDTO,
@@ -12,6 +9,7 @@ import {
   SuccessResponse,
   UpdateUserRoleDTO,
   UserDTO,
+  User,
 } from 'nestjs-app-utils';
 
 @Injectable()

@@ -1,20 +1,19 @@
-import { type DynamicModule, Module } from '@nestjs/common'
-import { ClientsModule, Transport } from '@nestjs/microservices'
+import { type DynamicModule, Module } from "@nestjs/common";
+import { ClientsModule, Transport } from "@nestjs/microservices";
 
-// enum from package
-import { MicroservicesNames } from 'nestjs-app-utils'
+import { MicroservicesNames } from "../../types/microservices";
 
 // Конфигурация микросервиса для работы с пользователями
 const usersServiceOptions = {
-  host: process.env.USERS_HOST || '127.0.0.1',
+  host: process.env.USERS_HOST || "127.0.0.1",
   port: +process.env.USERS_PORT || 3040,
-}
+};
 
 // Конфигурация микросервиса для работы с комментариями
 const commentsServiceOptions = {
-  host: process.env.COMMENTS_HOST || '127.0.0.1',
+  host: process.env.COMMENTS_HOST || "127.0.0.1",
   port: +process.env.COMMENTS_PORT || 3050,
-}
+};
 
 // Конфигурация клиент модуля для отправки сообщений (request-response) микросервисам
 const registeredModule: DynamicModule = ClientsModule.register([
@@ -28,7 +27,7 @@ const registeredModule: DynamicModule = ClientsModule.register([
     transport: Transport.TCP,
     options: commentsServiceOptions,
   },
-])
+]);
 
 /**
  * Клиент модуль для отправки сообщений (request-response) микросервисам

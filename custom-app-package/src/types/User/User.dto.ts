@@ -1,12 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-/**
- * Роли пользователей
- */
-export enum UserRole {
-  USER = "USER",
-  ADMIN = "ADMIN",
-}
+import { UserRole } from "./User.enum";
 
 /**
  * DTO для получения информации о пользователе

@@ -4,7 +4,6 @@ import * as bcrypt from 'bcrypt';
 
 // project imports
 import { UsersService } from 'src/users/users.service';
-import { User } from 'src/model/User.entity';
 
 // utils from package
 import {
@@ -12,6 +11,7 @@ import {
   LoginRequestDTO,
   RegisterRequestDTO,
   RpcCustomException,
+  User,
 } from 'nestjs-app-utils';
 
 @Injectable()
@@ -30,6 +30,7 @@ export class AuthService {
     const DBUser = await this.usersService.getUserByEmail(email);
     const isMatchPassword = await bcrypt.compare(password, DBUser.password);
 
+    // Если логин или пароль не совпал - отправляем ошибку
     if (!DBUser || !isMatchPassword) {
       throw new RpcCustomException({
         message: 'Ошибка авторизации',
@@ -58,6 +59,7 @@ export class AuthService {
 
     const existedDBUser = await this.usersService.getUserByEmail(email);
 
+    // Если пользователь с таким email уже существует - отправляем ошибку
     if (existedDBUser) {
       throw new RpcCustomException({
         message: 'Ошибка регистрации',
@@ -66,6 +68,7 @@ export class AuthService {
     }
 
     try {
+      // Хешируем пароль
       const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(password, saltRounds);
 

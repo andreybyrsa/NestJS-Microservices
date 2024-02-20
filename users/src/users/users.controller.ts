@@ -18,6 +18,14 @@ export class UsersMicroserviceConrtoller {
   constructor(private readonly usersSerive: UsersService) {}
 
   /**
+   * Обработчик get_user команды
+   */
+  @MessagePattern({ cmd: MicroservicesCMDs.GET_USER_BY_ID })
+  getUserById(userId: string): Promise<UserDTO> {
+    return this.usersSerive.getUserById(userId);
+  }
+
+  /**
    * Обработчик GET_CURRENT_USER команды
    */
   @MessagePattern({ cmd: MicroservicesCMDs.GET_CURRENT_USER })
@@ -34,9 +42,9 @@ export class UsersMicroserviceConrtoller {
   }
 
   /**
-   * Обработчик PUT_USER_ROLE команды
+   * Обработчик UPDATE_COMMENT команды
    */
-  @MessagePattern({ cmd: MicroservicesCMDs.PUT_USER_ROLE })
+  @MessagePattern({ cmd: MicroservicesCMDs.UPDATE_COMMENT })
   updateUserRole(
     updateUserRoleDTO: UpdateUserRoleDTO,
   ): Promise<SuccessResponse> {

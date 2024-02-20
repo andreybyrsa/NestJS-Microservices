@@ -1,11 +1,16 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { JwtModule, JwtService, JwtModuleOptions } from '@nestjs/jwt'
+import { APP_GUARD } from '@nestjs/core/constants'
 
-// project modules
-import { NestClientModule } from './modules/nestClient/nestClient.module'
+// project imports
 import { UsersModule } from './modules/users/users.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { JWTMidlleware } from './middlewares/jwt.middleware'
+import { CommentsModule } from './modules/comments/comments.module'
+import { RolesGuard } from './guards/roles.guard'
+
+// utils from package
+import { NestClientModule } from 'nestjs-app-utils'
 
 // Конфигурация JWT модуля
 const jwtModuleOptions: JwtModuleOptions = {
@@ -19,8 +24,16 @@ const jwtModuleOptions: JwtModuleOptions = {
     JwtModule.register(jwtModuleOptions),
     AuthModule,
     UsersModule,
+    CommentsModule,
   ],
-  providers: [JwtService],
+  providers: [
+    JwtService,
+    {
+      // Добавляем RolesGuard, чтобы можно было использовать над любым роутом
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
