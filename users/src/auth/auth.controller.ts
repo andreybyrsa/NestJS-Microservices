@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 
 // project imports
 import { AuthService } from './auth.service';
@@ -19,7 +19,7 @@ export class AuthMicroserviceController {
    * Обработчик AUTH_LOGIN команды
    */
   @MessagePattern({ cmd: MicroservicesCMDs.AUTH_LOGIN })
-  login(userDTO: LoginRequestDTO) {
+  login(@Payload() userDTO: LoginRequestDTO) {
     return this.authSerive.login(userDTO);
   }
 
@@ -27,7 +27,7 @@ export class AuthMicroserviceController {
    * Обработчик AUTH_REGISTER команды
    */
   @MessagePattern({ cmd: MicroservicesCMDs.AUTH_REGISTER })
-  register(userDTO: RegisterRequestDTO) {
+  register(@Payload() userDTO: RegisterRequestDTO) {
     return this.authSerive.register(userDTO);
   }
 }

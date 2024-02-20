@@ -1,5 +1,5 @@
 import { Controller, HttpException } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 
 // project imports
 import { UsersService } from './users.service';
@@ -18,10 +18,10 @@ export class UsersMicroserviceConrtoller {
   constructor(private readonly usersSerive: UsersService) {}
 
   /**
-   * Обработчик get_user команды
+   * Обработчик GET_USER_BY_ID команды
    */
   @MessagePattern({ cmd: MicroservicesCMDs.GET_USER_BY_ID })
-  getUserById(userId: string): Promise<UserDTO> {
+  getUserById(@Payload() userId: string): Promise<UserDTO> {
     return this.usersSerive.getUserById(userId);
   }
 
@@ -29,7 +29,7 @@ export class UsersMicroserviceConrtoller {
    * Обработчик GET_CURRENT_USER команды
    */
   @MessagePattern({ cmd: MicroservicesCMDs.GET_CURRENT_USER })
-  getCurrentUser(jwtUser: JWTUser): Promise<UserDTO> {
+  getCurrentUser(@Payload() jwtUser: JWTUser): Promise<UserDTO> {
     return this.usersSerive.getUserById(jwtUser.id);
   }
 
@@ -46,7 +46,7 @@ export class UsersMicroserviceConrtoller {
    */
   @MessagePattern({ cmd: MicroservicesCMDs.UPDATE_COMMENT })
   updateUserRole(
-    updateUserRoleDTO: UpdateUserRoleDTO,
+    @Payload() updateUserRoleDTO: UpdateUserRoleDTO,
   ): Promise<SuccessResponse> {
     return this.usersSerive.updateUserRole(updateUserRoleDTO);
   }
